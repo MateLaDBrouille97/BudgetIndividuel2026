@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget Annuel 2026 — ÖTOMATA Agency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f4f4f8;
+      --surface2: #eaeaf2;
+      --accent: #5b4ee0;
+      --accent2: #2aa8b4;
+      --gold: #c9920a;
+      --text: #1a1a2e;
+      --muted: #5a5a7a;
+      --border: rgba(91, 78, 224, 0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      color: var(--text);
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 20%, rgba(124,106,247,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 70%, rgba(79,196,207,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(124,106,247,0.12);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.3rem 1rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+    .badge::before { content: '●'; font-size: 0.5rem; }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+    .lang-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.3rem;
+    }
+    .lang-tab {
+      padding: 0.4rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .lang-tab.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+    h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* FEATURE CARDS */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.8rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .card:hover {
+      border-color: rgba(124,106,247,0.5);
+      transform: translateY(-3px);
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .card:hover::before { opacity: 1; }
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .card p { color: var(--muted); font-size: 0.92rem; line-height: 1.65; }
+    .card ul { list-style: none; margin-top: 0.75rem; }
+    .card ul li {
+      color: var(--muted);
+      font-size: 0.88rem;
+      padding: 0.2rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .card ul li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--accent2);
+    }
+
+    /* FEATURES LIST */
+    .features-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem 2rem;
+      margin-top: 2rem;
+    }
+    .feat-item {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .feat-item::before {
+      content: '✦';
+      color: var(--accent);
+      font-size: 0.6rem;
+      margin-top: 0.35rem;
+      flex-shrink: 0;
+    }
+
+    /* STEPS */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+      counter-reset: step;
+    }
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      counter-increment: step;
+    }
+    .step-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: var(--border);
+      line-height: 1;
+      min-width: 2rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .step p { color: var(--muted); font-size: 0.9rem; }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* PRIVACY SECTION */
+    .privacy-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem;
+      margin-top: 2rem;
+    }
+    .privacy-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-item { font-size: 0.85rem; }
+    .meta-item span { color: var(--muted); display: block; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    .privacy-section { margin-bottom: 2.5rem; }
+    .privacy-section h3 {
+      font-family: 'Syne', sans-serif;
+      color: var(--accent2);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      margin-top: 1.5rem;
+    }
+    .privacy-section h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin: 1rem 0 0.5rem;
+    }
+    .privacy-section p, .privacy-section li {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.75;
+    }
+    .privacy-section ul {
+      list-style: none;
+      margin: 0.5rem 0;
+      padding: 0;
+    }
+    .privacy-section ul li {
+      padding-left: 1.2rem;
+      position: relative;
+      margin-bottom: 0.3rem;
+    }
+    .privacy-section ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+    .privacy-section a { color: var(--accent2); text-decoration: none; }
+    .privacy-section a:hover { text-decoration: underline; }
+
+    /* PERMISSIONS TABLE */
+    .perm-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    .perm-table th {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.6rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .perm-table td {
+      padding: 0.8rem 1rem;
+      font-size: 0.87rem;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      vertical-align: top;
+    }
+    .perm-table td:first-child {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    /* LANG CONTENT */
+    .lang-content { display: none; }
+    .lang-content.active { display: block; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2.5rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    footer a { color: var(--accent2); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .features-list { grid-template-columns: 1fr; }
+      .privacy-wrap { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">ÖTOMATA <span>Agency</span></div>
+    <div class="nav-links">
+      <a href="#description">Description</a>
+      <a href="#features">Fonctionnalités</a>
+      <a href="#howto">Démarrage</a>
+      <a href="#privacy">Confidentialité</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="badge">Google Workspace Marketplace · v5.2.0</div>
+    <h1>Budget Annuel<br><em>2026</em></h1>
+    <p class="hero-sub">Gérez vos finances avec l'intelligence artificielle — directement dans Google Sheets.</p>
+    <div class="lang-tabs">
+      <button class="lang-tab active" onclick="setLang('fr')">🇫🇷 Français</button>
+      <button class="lang-tab" onclick="setLang('en')">🇬🇧 English</button>
+    </div>
+  </div>
+
+  <!-- ===================== FRENCH VERSION ===================== -->
+  <div id="lang-fr" class="lang-content active">
+
+    <section id="description">
+      <div class="section-label">Description</div>
+      <h2>Un centre de commandement<br>financier dans Google Sheets</h2>
+      <p style="color:var(--muted); max-width:640px;">Budget Annuel 2026 transforme votre Google Sheets en un véritable centre de commandement financier. Grâce à un assistant IA intégré compatible Claude (Anthropic), GPT-4o (OpenAI) et Gemini (Google), gérez vos dépenses, revenus, objectifs d'épargne et projections — simplement en écrivant en langage naturel.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section id="features">
+      <div class="section-label">Fonctionnalités clés</div>
+      <h2>Ce que vous pouvez faire<br>avec Budget 2026</h2>
+
+      <div class="features-grid">
+        <div class="card">
+          <div class="card-icon">💬</div>
+          <h3>Assistant IA en langage naturel</h3>
+          <ul>
+            <li>Dites : "J'ai dépensé 120 $ en courses"</li>
+            <li>Enregistrement automatique dans le bon onglet</li>
+            <li>Compatible Claude, GPT-4o et Gemini</li>
+            <li>Détecte votre langue (FR / EN / ES)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>14 onglets organisés automatiquement</h3>
+          <ul>
+            <li>12 onglets mensuels avec dépenses prévues vs réelles</li>
+            <li>Récapitulatif annuel avec graphiques</li>
+            <li>Onglet Objectifs financiers</li>
+            <li>Paramètres de configuration</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>Objectifs d'épargne intelligents</h3>
+          <ul>
+            <li>Créez des objectifs avec montant cible et deadline</li>
+            <li>Suivi mensuel avec barres de progression</li>
+            <li>Contributions déduites automatiquement</li>
+            <li>Rapport de progression instantané</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌍</div>
+          <h3>Multi-pays, multi-devises, multilingue</h3>
+          <ul>
+            <li>Canada ($), France (€), Espagne (€)</li>
+            <li>Crédits d'impôt calculés selon votre pays</li>
+            <li>Interface FR / EN / ES</li>
+            <li>Base fiscale 2026 intégrée pour CA, FR, ES</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">📈</div>
+          <h3>Analyses et projections</h3>
+          <ul>
+            <li>Dépenses détaillées par catégorie et par mois</li>
+            <li>Alertes dépassement de budget (+110 %)</li>
+            <li>Comparaison entre deux mois</li>
+            <li>Projection d'épargne sur 6 ou 12 mois</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔒</div>
+          <h3>Vos données, votre contrôle</h3>
+          <p>Aucune donnée personnelle collectée. Vos informations restent dans votre propre Google Sheets. Les clés API sont stockées exclusivement dans votre document.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:3rem;">
+        <div class="section-label">Toutes les fonctionnalités</div>
+        <div class="features-list">
+          <div class="feat-item">Assistant IA multi-fournisseur (Claude, GPT-4o, Gemini)</div>
+          <div class="feat-item">Saisie en langage naturel FR / EN / ES</div>
+          <div class="feat-item">14 onglets générés en un clic</div>
+          <div class="feat-item">Catégories personnalisables via l'assistant</div>
+          <div class="feat-item">Objectifs d'épargne avec barres de progression</div>
+          <div class="feat-item">Calcul automatique des crédits d'impôt (REER, CELI, IRPF…)</div>
+          <div class="feat-item">Export PDF en un clic</div>
+          <div class="feat-item">Graphiques dynamiques par catégorie</div>
+          <div class="feat-item">Formatage conditionnel (vert / rouge)</div>
+          <div class="feat-item">Solde reporté automatiquement de mois en mois</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section id="howto">
+      <div class="section-label">Démarrage rapide</div>
+      <h2>Comment ça marche</h2>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div><h3>Installer l'add-on</h3><p>Installez l'add-on et ouvrez votre Google Sheets.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div><h3>Générer le budget</h3><p>Allez dans <strong>Extensions → Budget 2026 → Générer Budget Complet</strong>.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div><h3>Configurer votre clé API</h3><p>Via <strong>Extensions → Budget 2026 → Configurer API</strong> (Claude, OpenAI ou Gemini).</p></div></div>
+        <div class="step"><div class="step-num">4</div><div><h3>Parler à l'assistant</h3><p>Ouvrez l'assistant IA et commencez : "J'ai reçu mon salaire de 3 200 $", "J'ai payé mon loyer 1 100 $"…</p></div></div>
+        <div class="step"><div class="step-num">5</div><div><h3>Laisser l'IA travailler</h3><p>L'assistant enregistre, analyse et répond — sans que vous ayez à chercher la bonne cellule.</p></div></div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- PRIVACY FR -->
+    <section id="privacy">
+      <div class="section-label">Politique de confidentialité</div>
+      <h2>Vos données sont protégées</h2>
+      <div class="privacy-wrap">
+        <div class="privacy-meta">
+          <div class="meta-item"><span>Développé par</span>Manuel T. LABRIDY | ÖTOMATA Agency</div>
+          <div class="meta-item"><span>Dernière mise à jour</span>Mars 2026</div>
+          <div class="meta-item"><span>Contact</span><a href="/cdn-cgi/l/email-protection#9cfff3f2e8fdffe8dcf3e8f3f1fde8fdb2fdfbf9f2ffe5"><span class="__cf_email__" data-cfemail="f89b97968c999b8cb8978c9795998c99d6999f9d969b81">[email&#160;protected]</span></a></div>
+        </div>
+
+        <div class="privacy-section">
+          <h3>1. Objet</h3>
+          <p>La présente politique décrit comment l'add-on Google Sheets "Budget Annuel 2026" traite les données de ses utilisateurs. Nous nous engageons à respecter votre vie privée et à n'utiliser vos données qu'aux fins strictement nécessaires au fonctionnement de l'Add-on.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3>2. Données collectées</h3>
+          <h4>2.1 Données que nous ne collectons PAS</h4>
+          <p>L'Add-on ne collecte, ne stocke et ne transmet AUCUNE des informations suivantes vers nos serveurs :</p>
+          <ul>
+            <li>Données financières (dépenses, revenus, soldes, objectifs)</li>
+            <li>Informations personnelles (nom, adresse, numéro de téléphone)</li>
+            <li>Données de localisation</li>
+            <li>Identifiants de connexion Google</li>
+            <li>Contenu de vos Google Sheets</li>
+          </ul>
+
+          <h4>2.2 Données stockées localement dans votre document</h4>
+          <p>Les informations suivantes sont stockées exclusivement dans les propriétés de votre propre document Google Sheets (PropertiesService), accessibles uniquement par vous :</p>
+          <ul>
+            <li>Clés API saisies par l'utilisateur (Claude, OpenAI, Gemini) — chiffrées par Google</li>
+            <li>Objectifs financiers créés via l'assistant IA</li>
+            <li>Préférences de configuration (langue, pays, solde de départ)</li>
+            <li>Compteur d'utilisation anonyme (usage local uniquement)</li>
+          </ul>
+          <p style="margin-top:0.5rem;">Ces données ne quittent jamais votre document. Elles sont supprimées définitivement si vous désinstallez l'Add-on ou supprimez le document.</p>
+
+          <h4>2.3 Données transmises aux fournisseurs IA</h4>
+          <p>Lorsque vous utilisez l'assistant IA, les messages sont transmis directement au fournisseur choisi (Anthropic, OpenAI ou Google), avec votre propre clé API, sous votre propre compte :</p>
+          <ul>
+            <li>Anthropic (Claude) : <a href="https://anthropic.com/legal/privacy" target="_blank">anthropic.com/legal/privacy</a></li>
+            <li>OpenAI (GPT-4o) : <a href="https://openai.com/privacy" target="_blank">openai.com/privacy</a></li>
+            <li>Google (Gemini) : <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></li>
+          </ul>
+        </div>
+
+        <div class="privacy-section">
+          <h3>3. Permissions Google OAuth</h3>
+          <table class="perm-table">
+            <thead><tr><th>Permission</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>spreadsheets</td><td>Lire et écrire dans votre Google Sheets actif (budget, objectifs, paramètres)</td></tr>
+              <tr><td>script.container.ui</td><td>Afficher les menus, barres latérales et boîtes de dialogue de l'Add-on</td></tr>
+              <tr><td>userinfo.email</td><td>Identifier l'utilisateur pour les logs d'erreur internes (non transmis)</td></tr>
+              <tr><td>script.external_request</td><td>Appeler les APIs IA (Anthropic, OpenAI, Google) à votre demande</td></tr>
+              <tr><td>drive.file</td><td>Accéder aux fichiers créés par l'Add-on dans votre Drive</td></tr>
+              <tr><td>script.scriptapp</td><td>Créer des déclencheurs automatiques (onEdit) pour la mise à jour en temps réel</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="privacy-section">
+          <h3>4. Partage des données</h3>
+          <p>Nous ne vendons, ne louons et ne partageons aucune donnée utilisateur avec des tiers à des fins commerciales.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3>5. Sécurité</h3>
+          <p>Les clés API sont stockées via PropertiesService de Google Apps Script, qui chiffre les données au repos. Recommandations :</p>
+          <ul>
+            <li>Ne jamais partager votre fichier Google Sheets si des clés API y sont stockées</li>
+            <li>Utiliser des clés API avec des limites de dépenses configurées</li>
+            <li>Régénérer vos clés API en cas de compromission suspectée</li>
+          </ul>
+        </div>
+
+        <div class="privacy-section">
+          <h3>6. Conservation et suppression</h3>
+          <p>Supprimez vos données à tout moment via :</p>
+          <ul>
+            <li>Extensions → Budget 2026 → Réinitialiser Budget</li>
+            <li>Extensions → Gérer les extensions (désinstallation)</li>
+            <li>Suppression de votre document Google Sheets</li>
+          </ul>
+        </div>
+
+        <div class="privacy-section">
+          <h3>7. Enfants</h3>
+          <p>L'Add-on n'est pas destiné aux enfants de moins de 13 ans et ne collecte sciemment aucune donnée les concernant.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3>8. Modifications</h3>
+          <p>Nous nous réservons le droit de modifier cette politique. En cas de changement substantiel, une notification sera affichée dans l'Add-on lors de la prochaine utilisation.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3>9. Contact</h3>
+          <ul>
+            <li>Email : <a href="/cdn-cgi/l/email-protection#adcec2c3d9ccced9edc2d9c2c0ccd9cc83cccac8c3ced4"><span class="__cf_email__" data-cfemail="25464a4b51444651654a514a484451440b4442404b465c">[email&#160;protected]</span></a></li>
+            <li>Site web : <a href="https://otomata.agency" target="_blank">otomata.agency</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /lang-fr -->
+
+
+  <!-- ===================== ENGLISH VERSION ===================== -->
+  <div id="lang-en" class="lang-content">
+
+    <section>
+      <div class="section-label">Description</div>
+      <h2>A personal finance hub<br>inside Google Sheets</h2>
+      <p style="color:var(--muted); max-width:640px;">Annual Budget 2026 turns your Google Sheets into a powerful personal finance hub. Powered by a built-in AI assistant compatible with Claude (Anthropic), GPT-4o (OpenAI), and Gemini (Google), manage expenses, income, savings goals, and projections — simply by writing in plain language.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <div class="section-label">Key features</div>
+      <h2>What you can do<br>with Budget 2026</h2>
+
+      <div class="features-grid">
+        <div class="card">
+          <div class="card-icon">💬</div>
+          <h3>AI assistant in natural language</h3>
+          <ul>
+            <li>Just say: "I spent $120 on groceries"</li>
+            <li>Auto-records in the right tab and category</li>
+            <li>Compatible with Claude, GPT-4o, and Gemini</li>
+            <li>Auto-detects your language (FR / EN / ES)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>14 organized tabs, auto-generated</h3>
+          <ul>
+            <li>12 monthly tabs: planned vs actual</li>
+            <li>Annual Summary with evolution charts</li>
+            <li>Financial Goals tab</li>
+            <li>Settings: language, country, currency</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>Smart savings goals</h3>
+          <ul>
+            <li>Set goals with target amount and deadline</li>
+            <li>Track monthly contributions with progress bars</li>
+            <li>Contributions deducted from monthly balance</li>
+            <li>Instant progress report on demand</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌍</div>
+          <h3>Multi-country, multi-currency, multilingual</h3>
+          <ul>
+            <li>Canada ($), France (€), Spain (€)</li>
+            <li>Tax credits calculated per country</li>
+            <li>Interface in French, English, and Spanish</li>
+            <li>2026 tax knowledge base for CA, FR, ES</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">📈</div>
+          <h3>Analytics & projections</h3>
+          <ul>
+            <li>Expense breakdown by category and month</li>
+            <li>Over-budget alerts (&gt;110%)</li>
+            <li>Month-to-month comparison</li>
+            <li>6 or 12-month savings projection</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔒</div>
+          <h3>Your data, your control</h3>
+          <p>No personal data collected. Your financial information stays in your own Google Sheets. API keys are stored exclusively in your document.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:3rem;">
+        <div class="section-label">All features</div>
+        <div class="features-list">
+          <div class="feat-item">Multi-provider AI assistant (Claude, GPT-4o, Gemini)</div>
+          <div class="feat-item">Natural language input FR / EN / ES</div>
+          <div class="feat-item">14 tabs generated in one click</div>
+          <div class="feat-item">Customizable categories via the assistant</div>
+          <div class="feat-item">Savings goals with progress bars and deadlines</div>
+          <div class="feat-item">Automatic tax credit calculations (RRSP, TFSA, IRPF…)</div>
+          <div class="feat-item">One-click PDF export</div>
+          <div class="feat-item">Dynamic charts: category breakdown, expenses vs income</div>
+          <div class="feat-item">Automatic conditional formatting (green / red)</div>
+          <div class="feat-item">Balance automatically carried forward month to month</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- PRIVACY EN -->
+    <section>
+      <div class="section-label">Privacy Policy</div>
+      <h2>Your data is protected</h2>
+      <div class="privacy-wrap">
+        <div class="privacy-meta">
+          <div class="meta-item"><span>Developed by</span>Manuel T. LABRIDY | ÖTOMATA Agency</div>
+          <div class="meta-item"><span>Last updated</span>March 2026</div>
+          <div class="meta-item"><span>Contact</span><a href="/cdn-cgi/l/email-protection#4724282933262433072833282a2633266926202229243e"><span class="__cf_email__" data-cfemail="bfdcd0d1cbdedccbffd0cbd0d2decbde91ded8dad1dcc6">[email&#160;protected]</span></a></div>
+        </div>
+
+        <div class="privacy-section">
+          <h3>1. Overview</h3>
+          <p>This Privacy Policy describes how the "Annual Budget 2026" Google Sheets add-on handles user data. We are committed to protecting your privacy and using your data only as strictly necessary to operate the Add-on.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3>2. Data collected</h3>
+          <h4>2.1 Data we do NOT collect</h4>
+          <p>The Add-on does not collect, store, or transmit any of the following to our servers:</p>
+          <ul>
+            <li>Financial data (expenses, income, balances, goals)</li>
+            <li>Personal information (name, address, phone number)</li>
+            <li>Location data</li>
+            <li>Google login credentials</li>
+            <li>The content of your Google Sheets</li>
+          </ul>
+
+          <h4>2.2 Data stored locally in your document</h4>
+          <p>The following is stored exclusively in your own Google Sheets document properties (PropertiesService), accessible only by you:</p>
+          <ul>
+            <li>API keys entered by the user (Claude, OpenAI, Gemini) — encrypted by Google</li>
+            <li>Financial goals created via the AI assistant</li>
+            <li>Configuration preferences (language, country, starting balance)</li>
+            <li>Anonymous usage counter (local only)</li>
+          </ul>
+          <p style="margin-top:0.5rem;">This data never leaves your document. It is permanently deleted if you uninstall the Add-on or delete the document.</p>
+
+          <h4>2.3 Data transmitted to AI providers</h4>
+          <p>When you use the built-in AI assistant, messages are transmitted directly to your chosen provider (Anthropic, OpenAI, or Google), using your own API key:</p>
+          <ul>
+            <li>Anthropic (Claude): <a href="https://anthropic.com/legal/privacy" target="_blank">anthropic.com/legal/privacy</a></li>
+            <li>OpenAI (GPT-4o): <a href="https://openai.com/privacy" target="_blank">openai.com/privacy</a></li>
+            <li>Google (Gemini): <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></li>
+          </ul>
+        </div>
+
+        <div class="privacy-section">
+          <h3>3. Google OAuth permissions</h3>
+          <table class="perm-table">
+            <thead><tr><th>Permission</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>spreadsheets</td><td>Read and write to your active Google Sheets file (budget, goals, settings)</td></tr>
+              <tr><td>script.container.ui</td><td>Display the Add-on's menus, sidebars, and dialogs</td></tr>
+              <tr><td>userinfo.email</td><td>Identify the user for internal error logs (not transmitted externally)</td></tr>
+              <tr><td>script.external_request</td><td>Call AI APIs (Anthropic, OpenAI, Google) at your request</td></tr>
+              <tr><td>drive.file</td><td>Access files created by the Add-on in your Drive</td></tr>
+              <tr><td>script.scriptapp</td><td>Create automatic triggers (onEdit) for real-time updates</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="privacy-section">
+          <h3>4. Data sharing</h3>
+          <p>We do not sell, rent, or share any user data with third parties for commercial purposes.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3>5. Security</h3>
+          <p>API keys are stored via Google Apps Script's PropertiesService, which encrypts data at rest. We recommend users:</p>
+          <ul>
+            <li>Never share their Google Sheets file with unauthorized parties if API keys are stored in it</li>
+            <li>Set spending limits on their API keys in their provider dashboard</li>
+            <li>Regenerate their API keys if a compromise is suspected</li>
+          </ul>
+        </div>
+
+        <div class="privacy-section">
+          <h3>6. Retention and deletion</h3>
+          <p>You can delete your data at any time via:</p>
+          <ul>
+            <li>Extensions → Budget 2026 → Reset Budget</li>
+            <li>Extensions → Manage extensions (uninstall)</li>
+            <li>Deleting your Google Sheets document</li>
+          </ul>
+        </div>
+
+        <div class="privacy-section">
+          <h3>7. Children</h3>
+          <p>The Add-on is not intended for children under 13 and does not knowingly collect any data from them.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3>8. Changes</h3>
+          <p>We reserve the right to modify this policy. In the event of a material change, a notification will be displayed in the Add-on upon next use.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h3>9. Contact</h3>
+          <ul>
+            <li>Email: <a href="/cdn-cgi/l/email-protection#c8aba7a6bca9abbc88a7bca7a5a9bca9e6a9afada6abb1"><span class="__cf_email__" data-cfemail="12717d7c66737166527d667d7f7366733c7375777c716b">[email&#160;protected]</span></a></li>
+            <li>Website: <a href="https://otomata.agency" target="_blank">otomata.agency</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /lang-en -->
+
+  <footer>
+    <p>© Manuel T. LABRIDY | ÖTOMATA Agency — Budget Annuel 2026 </p>
+  </footer>
+</body>
+</html>
+
+ 
